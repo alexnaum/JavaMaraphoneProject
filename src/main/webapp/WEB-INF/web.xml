@@ -6,12 +6,43 @@
 
     <!--Json handler-->
     <servlet-mapping>
-        <servlet-name>Users</servlet-name>
-        <url-pattern>/users</url-pattern>
+        <servlet-name>GetAllUsers</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Users</servlet-name>
-        <servlet-class>servlets.Users</servlet-class>
+        <servlet-name>GetAllUsers</servlet-name>
+        <servlet-class>servlets.GetAllUsers</servlet-class>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUserServlet</servlet-name>
+        <url-pattern>/add_user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUserServlet</servlet-name>
+        <servlet-class>servlets.AddUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchUserServlet</servlet-name>
+        <servlet-class>servlets.SearchUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchByNameAndEmail</servlet-name>
+        <url-pattern>/searchByNameEmail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchByNameAndEmail</servlet-name>
+        <servlet-class>servlets.SearchByNameAndEmail</servlet-class>
+    </servlet>
+
 </web-app>

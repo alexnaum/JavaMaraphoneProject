@@ -5,18 +5,26 @@ import dto.UserDTO;
 import lombok.Getter;
 import lombok.Setter;
 
-@JsonPropertyOrder({"id","name","email"})
-@Getter @Setter
-public class User implements IUser{
+@JsonPropertyOrder({"id", "name", "email"})
+@Getter
+@Setter
+public class User implements IUser {
     private int id;
     private String name;
     private String email;
-    public User(){
+
+    public User() {
     }
-    public User(int id, String name, String email){
+
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    @Override
+    public String toString(){
+        return "{ name: "+name+" , email: "+ email;
     }
 
     @Override
@@ -26,6 +34,8 @@ public class User implements IUser{
 
     @Override
     public Long createUser(UserDTO data) {
-        return null;
+        data.setName(name);
+        data.setEmail(email);
+        return Long.valueOf(id);
     }
 }
