@@ -33,7 +33,8 @@ public class SearchByNameAndEmail extends HttpServlet {
             response.getWriter().println(json);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
     }
