@@ -16,18 +16,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddUserServlet extends HttpServlet {
-    private Map<Integer, User> users;
     protected UserDBAction con;
     @Override
     public void init(){
         con = new UserDBAction();
-        final Object users = getServletContext().getAttribute("users");
-        if (users == null || !(users instanceof ConcurrentHashMap)) {
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
-            this.users = (ConcurrentHashMap<Integer, User>) users;
-        }
-        //id = new AtomicInteger(2);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
