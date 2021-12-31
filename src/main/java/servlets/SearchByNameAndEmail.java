@@ -3,8 +3,7 @@ package servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import repository.UserDBAction;
+import repository.UserRepository;
 import service.User;
 
 import java.io.IOException;
@@ -12,13 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@WebServlet(name = "SearchByNameAndEmail", value = "/SearchByNameAndEmail")
 public class SearchByNameAndEmail extends HttpServlet {
 
-    private UserDBAction con;
+    private UserRepository con;
     @Override
     public void init() {
-        con = new UserDBAction();
+        con = new UserRepository();
     }
 
     @Override

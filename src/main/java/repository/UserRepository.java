@@ -1,18 +1,16 @@
 package repository;
 
-import dto.UserDTO;
 import service.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDBAction {
+public class UserRepository {
     public void createUser(User user) throws ClassNotFoundException,SQLException {
         String sql = "INSERT INTO users(name,email) VALUES (?,?)";
         Connection con = DBConnection.getMySQLConnection();
         PreparedStatement ps = con.prepareStatement(sql);
-        //ps.setInt(1, user.getId());
         ps.setString(1, user.getName());
         ps.setString(2, user.getEmail());
         ps.executeUpdate();

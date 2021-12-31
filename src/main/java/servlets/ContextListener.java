@@ -25,9 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
             users = new ConcurrentHashMap<>();
 
             servletContext.setAttribute("users", users);
-
-            //final User user = Utils.createStubUser(1, "Первый", 10);
-            //this.users.put(user.getId(), user);
         }
         @Override
         public void contextDestroyed(ServletContextEvent sce) {

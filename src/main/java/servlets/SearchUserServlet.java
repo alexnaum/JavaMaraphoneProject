@@ -4,17 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import repository.UserDBAction;
+import repository.UserRepository;
 import service.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class SearchUserServlet extends HttpServlet {
-    private UserDBAction con;
+    private UserRepository con;
     @Override
     public void init() {
-        con = new UserDBAction();
+        con = new UserRepository();
     }
 
     @Override
