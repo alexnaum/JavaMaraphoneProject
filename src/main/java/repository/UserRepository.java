@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
-    public void createUser(User user) throws ClassNotFoundException,SQLException {
+    public void createUser(Connection con, User user) throws SQLException {
         String sql = "INSERT INTO users(name,email) VALUES (?,?)";
-        Connection con = DBConnection.getMySQLConnection();
+        //Connection con = DBConnection.getMySQLConnection();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, user.getName());
         ps.setString(2, user.getEmail());
         ps.executeUpdate();
     }
 
-    public List<User> getAllUsers() throws ClassNotFoundException, SQLException {
+    public List<User> getAllUsers(Connection con) throws ClassNotFoundException, SQLException {
         List<User> userList = new ArrayList<>();
         String sql = "select * from users";
-        Connection con = DBConnection.getMySQLConnection();
+        //Connection con = DBConnection.getMySQLConnection();
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);
         while (rs.next()) {
@@ -30,10 +30,10 @@ public class UserRepository {
         }
         return userList;
     }
-    public User searchById(int id) throws SQLException, ClassNotFoundException {
+    public User searchById(Connection con, int id) throws SQLException, ClassNotFoundException {
         String sql = "select * from users where id = ?";
         User user = new User();
-        Connection con = DBConnection.getMySQLConnection();
+        //Connection con = DBConnection.getMySQLConnection();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -46,9 +46,9 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> searchUser(String name, String email) throws SQLException, ClassNotFoundException {
+    public List<User> searchUser(Connection con, String name, String email) throws SQLException, ClassNotFoundException {
         String sql = "select * from users u where u.name = ? and u.email=?";
-        Connection con = DBConnection.getMySQLConnection();
+        //Connection con = DBConnection.getMySQLConnection();
         List<User> user = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, name);

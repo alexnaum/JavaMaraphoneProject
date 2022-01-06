@@ -1,29 +1,56 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import repository.BasicConnectionPool;
 import repository.UserRepository;
 import service.User;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.LogManager;
 
-public class AddUserServlet extends HttpServlet {
-    private Map<Integer, User> users;
+public class CreateUserServlet extends HttpServlet {
+    //private Map<Integer, User> users;
     protected UserRepository con;
+    Logger log = LoggerFactory.getLogger(CreateUserServlet.class);
     @Override
     public void init(){
-        con = new UserRepository();
-        final Object users = getServletContext().getAttribute("users");
+        //log.("");
+        Properties pr = new Properties();
+        FileInputStream file = null;
+        try{
+          file = new FileInputStream("src/main/resources/db.properties");
+          pr.load(file);
+          String url = pr.getProperty("url");
+          String user = pr.getProperty("user");
+          String password = pr.getProperty("password");
+          BasicConnectionPool.create(url, user, password).getConnection();
+        }
+        catch(IOException e){
+            log.error("File "+ file +" not found!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //con = new UserRepository();
+
+       /* final Object users = getServletContext().getAttribute("users");
         if (users == null || !(users instanceof ConcurrentHashMap)) {
             throw new IllegalStateException("You're repo does not initialize!");
         } else {
             this.users = (ConcurrentHashMap<Integer, User>) users;
-        }
+        }*/
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

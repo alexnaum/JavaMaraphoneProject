@@ -22,7 +22,7 @@
 
     <servlet>
         <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>servlets.AddUserServlet</servlet-class>
+        <servlet-class>servlets.CreateUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
