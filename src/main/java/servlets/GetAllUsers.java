@@ -7,11 +7,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import repository.UserRepository;
 import service.User;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GetAllUsers extends HttpServlet {
     private UserRepository con;
+    Connection connect;
     @Override
     public void init() {
         con = new UserRepository();
@@ -22,7 +24,7 @@ public class GetAllUsers extends HttpServlet {
         response.setContentType("text/html");
         List<User> userList = null;
      try {
-            userList = con.getAllUsers();
+            userList = con.getAllUsers(connect);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

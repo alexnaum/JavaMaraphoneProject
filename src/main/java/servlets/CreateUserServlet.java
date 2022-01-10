@@ -1,8 +1,6 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +22,7 @@ import java.util.logging.LogManager;
 public class CreateUserServlet extends HttpServlet {
     //private Map<Integer, User> users;
     protected UserRepository con;
-    Logger log = LoggerFactory.getLogger(CreateUserServlet.class);
+    //Logger log = LoggerFactory.getLogger(CreateUserServlet.class);
     Connection cone;
     @Override
     public void init(){
@@ -40,7 +38,7 @@ public class CreateUserServlet extends HttpServlet {
           cone = BasicConnectionPool.create(url, user, password).getConnection();
         }
         catch(IOException e){
-            log.error("File "+ file +" not found!");
+            //log.error("File "+ file +" not found!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

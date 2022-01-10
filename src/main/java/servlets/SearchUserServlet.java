@@ -8,10 +8,12 @@ import repository.UserRepository;
 import service.User;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class SearchUserServlet extends HttpServlet {
     private UserRepository con;
+    Connection connect;
     @Override
     public void init() {
         con = new UserRepository();
@@ -23,7 +25,7 @@ public class SearchUserServlet extends HttpServlet {
         response.setContentType("text/html");
         User user = new User();
         try {
-            user = con.searchById(Integer.parseInt(id));
+            user = con.searchById(connect, Integer.parseInt(id));
             final String json = new ObjectMapper().writeValueAsString(user);
             response.getWriter().println(json);
         } catch (SQLException e) {

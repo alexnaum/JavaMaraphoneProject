@@ -7,6 +7,7 @@ import repository.UserRepository;
 import service.User;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class SearchByNameAndEmail extends HttpServlet {
 
     private UserRepository con;
+    Connection connect;
     @Override
     public void init() {
         con = new UserRepository();
@@ -26,7 +28,7 @@ public class SearchByNameAndEmail extends HttpServlet {
         response.setContentType("text/html");
         List<User> user = new ArrayList<>();
         try {
-            user = con.searchUser(name, email);
+            user = con.searchUser(connect, name, email);
             final String json = new ObjectMapper().writeValueAsString(user);
             response.getWriter().println(json);
         } catch (SQLException e) {
