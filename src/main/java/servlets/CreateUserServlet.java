@@ -14,6 +14,7 @@ import service.User;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
@@ -24,6 +25,7 @@ public class CreateUserServlet extends HttpServlet {
     //private Map<Integer, User> users;
     protected UserRepository con;
     Logger log = LoggerFactory.getLogger(CreateUserServlet.class);
+    Connection cone;
     @Override
     public void init(){
         //log.("");
@@ -35,7 +37,7 @@ public class CreateUserServlet extends HttpServlet {
           String url = pr.getProperty("url");
           String user = pr.getProperty("user");
           String password = pr.getProperty("password");
-          BasicConnectionPool.create(url, user, password).getConnection();
+          cone = BasicConnectionPool.create(url, user, password).getConnection();
         }
         catch(IOException e){
             log.error("File "+ file +" not found!");
@@ -62,7 +64,7 @@ public class CreateUserServlet extends HttpServlet {
 
         try{
             if(!con.checkExistEmail(email)){
-                con.createUser(user);
+                con.createUser(cone, user);
                 final String json = new ObjectMapper().writeValueAsString(user);
                 response.getWriter().write(json);
             } else
