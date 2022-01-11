@@ -31,6 +31,11 @@ public class BasicConnectionPool implements ConnectionPool{
         }
         return new BasicConnectionPool(url, user, password, pool);
     }
+    private static Connection createConnection(
+            String url, String user, String password)
+            throws SQLException {
+        return DriverManager.getConnection(url, user, password);
+    }
     @Override
     public Connection getConnection() {
         Connection connection = connectionPool

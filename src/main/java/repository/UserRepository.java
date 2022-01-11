@@ -5,6 +5,8 @@ import service.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
 
 public class UserRepository {
     public void createUser(Connection con, User user) throws SQLException {
